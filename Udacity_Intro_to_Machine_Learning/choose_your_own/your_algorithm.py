@@ -15,7 +15,6 @@ bumpy_fast = [features_train[ii][1] for ii in range(0, len(features_train)) if l
 grade_slow = [features_train[ii][0] for ii in range(0, len(features_train)) if labels_train[ii]==1]
 bumpy_slow = [features_train[ii][1] for ii in range(0, len(features_train)) if labels_train[ii]==1]
 
-
 #### initial visualization
 plt.xlim(0.0, 1.0)
 plt.ylim(0.0, 1.0)
@@ -31,14 +30,39 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+############################################################
+# 1. KNeighborsClassifier : k nearest neighbors
+############################################################
+from sklearn import neighbors
 
+clf = neighbors.KNeighborsClassifier(n_neighbors = 2)
+clf.fit(features_train, labels_train)
 
+accuracy = clf.score(features_test, labels_test)
+print("Accuracy of KNeighborsClassifier : " + str(accuracy))
+############################################################
+# 2. RandomForestClassifier : random forest
+############################################################
+from sklearn.ensemble import RandomForestClassifier
 
+clf = RandomForestClassifier()
+clf.fit(features_train, labels_train)
 
+accuracy = clf.score(features_test, labels_test)
+print("Accuracy of RandomForestClassifier : " + str(accuracy))
+############################################################
+# 3. AdaBoostClassifier : Adaboost
+############################################################
+from sklearn.ensemble import AdaBoostClassifier
+clf = AdaBoostClassifier()
+clf.fit(features_train, labels_train)
 
-
+accuracy = clf.score(features_test, labels_test)
+print("Accuracy of AdaBoostClassifier : " + str(accuracy))
 
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
+    print("Name Error!")
     pass
+
